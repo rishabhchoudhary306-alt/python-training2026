@@ -1,0 +1,39 @@
+contacts = {}
+numbers = set()
+while True:
+    print("\n1.Add")
+    print("2.Search")
+    print("3.Update")
+    print("4.Delete")
+    print("5.Show")
+    print("6.Exit")
+    choice = input("Enter your choice you want: ")
+    if choice == "1":
+        name = input("Enter Name: ")
+        number = input("Enter Number: ")
+        if number in numbers:
+            print("number is already exist!")
+        else:
+            contacts[name] = number
+            numbers.add(number)
+    elif choice == "2":
+        name = input("Enter Name: ")
+        print(contacts.get(name, "Not Found"))
+    elif choice == "3":
+        name = input("Enter Name: ")
+        if name in contacts:
+            contacts[name] = input("Enter New Number: ")
+            print("Updated")
+        else:
+            print("Not Found")
+    elif choice == "4":
+        name = input("Enter Name: ")
+        if name in contacts:
+            numbers.remove(contacts[name])
+            del contacts[name]
+            print("Deleted")
+    elif choice == "5":
+        print(contacts)
+
+    elif choice == "6":
+        break
