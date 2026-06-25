@@ -1,0 +1,20 @@
+students = {
+    "Rishabh": 89,
+    "Muskan": 92,
+    "dewasnhu": 81,
+    "pooja": 80,
+    "nikhil":69,
+}
+average = sum(students.values()) / len(students)
+topper = max(students, key=students.get)
+grades = {
+    name: "A" if marks >= 90
+    else "B" if marks >= 80
+    else "C" if marks >= 70
+    else "D"
+    for name, marks in students.items()
+}
+print("Average Marks:", average)
+print("Topper:", topper)
+for name, grade in grades.items():
+    print(name, ":", grade)
