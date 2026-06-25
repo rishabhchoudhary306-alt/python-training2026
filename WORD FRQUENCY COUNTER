@@ -1,0 +1,27 @@
+text = input("Enter a paragraph: ").lower()
+words = text.split()
+frequency = {}
+for word in words:
+    if word in frequency:
+        frequency[word] += 1
+    else:
+        frequency[word] = 1
+print("\n----- WORD ANALYZER FREQUENCY -----")
+print("Total Words:", len(words))
+print("Unique Words:", len(frequency))
+longest_word = max(words, key=len)
+print("Longest Word:", longest_word)
+most_frequent = max(frequency, key=frequency.get)
+print("Most Frequent Word:", most_frequent)
+print("Frequency:", frequency[most_frequent])
+print("\nWord Frequencies:")
+for word, count in frequency.items():
+    print(f"{word} : {count}")
+top_five = sorted(
+    frequency.items(),
+    key=lambda item: item[1],
+    reverse=True
+)[:5]
+print("\nTop 5 Frequent Words:")
+for word, count in top_five:
+    print(f"{word} : {count}")
