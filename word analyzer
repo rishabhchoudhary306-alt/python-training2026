@@ -1,0 +1,12 @@
+paragraph = input("Enter a paragraph: ")
+words = paragraph.split()
+vowels = "aeiouAEIOU"
+word_count = len(words)
+longest_word = max(words, key=len)
+vowel_count = 0
+for ch in paragraph:
+    if ch in vowels:
+        vowel_count += 1
+print("Total words:", word_count)
+print("Longest word:", longest_word)
+print("Total vowels:", vowel_count)
