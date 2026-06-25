@@ -1,0 +1,27 @@
+class Book:
+    def __init__(self):
+        self.title = input("Enter the book name: ")
+        self.author = input("Enter the author name: ")
+    def display(self):
+        print("Title:", self.title)
+        print("Author:", self.author)
+class BookType:
+    def __init__(self):
+        self.subject = input("Enter the subject: ")
+        self.novel = input("Enter the novel type: ")
+    def display_type(self):
+        print("Subject:", self.subject)
+        print("Novel:", self.novel)
+class Library(Book, BookType):
+    def __init__(self):
+        Book.__init__(self)
+        BookType.__init__(self)
+        self.book_id = input("Enter the book ID: ")
+        self.available_book = int(input("Enter the number of available books: "))
+    def display(self): c
+        Book.display(self)
+        BookType.display_type(self)
+        print("Book ID:", self.book_id)
+        print("Available Books:", self.available_book)
+lib = Library()
+lib.display()
