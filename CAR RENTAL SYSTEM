@@ -1,0 +1,37 @@
+class Vehicle:
+    def __init__(self, days, km):
+        self.days = days
+        self.km = km
+    def calculate_rent(self):
+        pass
+class Bike(Vehicle):
+    def calculate_rent(self):
+        extra_charge = 0
+        if self.km > 250:
+            extra_charge = (self.km - 250) * 5
+        return extra_charge
+class Car(Vehicle):
+    def calculate_rent(self):
+        extra_charge = 0
+        if self.km > 250:
+            extra_charge = (self.km - 250) * 12
+        return extra_charge
+class Bus(Vehicle):
+    def calculate_rent(self):
+        extra_charge = 0
+        if self.km > 250:
+            extra_charge = (self.km - 250) * 20
+        return extra_charge
+print("Welcome to Vehicle Rental System")
+vehicle_type = input("Enter vehicle (bike/car/bus): ")
+days = int(input("Enter number of days: "))
+km = int(input("Enter total kilometers travelled: "))
+vehicles = {
+    "bike": Bike,
+    "car": Car,
+    "bus": Bus
+}
+vehicle = vehicles[vehicle_type](days, km)
+extra_charge = vehicle.calculate_rent()
+
+print("Extra Charge =", extra_charge)
