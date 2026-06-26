@@ -1,0 +1,74 @@
+import re
+class Account:
+    def __init__(self, acc_no, balance):
+        if re.fullmatch(r"[A-Z]{2}[0-9]{4}", acc_no):
+            self.acc_no = acc_no
+        else:
+            print("Account Number is invalid!")
+            self.acc_no = "XX0000"
+
+        self.__balance = balance
+    def deposit(self, amount):
+        self.__balance += amount
+        print("Amount  is Deposited Successfully.")
+    def get_balance(self):
+        return self.__balance
+    def set_balance(self, amount):
+        self.__balance = amount
+    def withdraw(self, amount):
+        pass
+
+class SavingsAccount(Account):
+    def withdraw(self, amount):
+        if amount <= self.get_balance():
+            self.set_balance(self.get_balance() - amount)
+            print("Withdrawal is Successful.")
+        else:
+            print("Insufficient bank Balance.")
+
+class CurrentAccount(Account):
+    def withdraw(self, amount):
+        if amount <= self.get_balance() + 5000:
+            self.set_balance(self.get_balance() - amount)
+            print("Withdrawal is Successful.")
+        else:
+            print(" your Overdraft Limit Exceeded.")
+
+acc_type = input("Enter Account Type (Savings/Current): ")
+
+acc_no = input("Enter Account Number (Example: AB1234): ")
+balance = float(input("Enter Initial Balance: "))
+
+if acc_type.lower() == "savings":
+    account = SavingsAccount(acc_no, balance)
+elif acc_type.lower() == "current":
+    account = CurrentAccount(acc_no, balance)
+else:
+    print("Invalid Account Type")
+    exit()
+
+while True:
+
+    print("\n1. Deposit")
+    print("2. Withdraw")
+    print("3. Check Balance")
+    print("4. Exit")
+
+    choice = input("Enter Choice: ")
+
+    if choice == "1":
+        amount = float(input("Enter  your deposit Amount: "))
+        account.deposit(amount)
+
+    elif choice == "2":
+        amount = float(input("Enter withdrawal Amount: "))
+        account.withdraw(amount)
+
+    elif choice == "3":
+        print("your bank Balance =", account.get_balance())
+
+    elif choice == "4":
+        print("Thank You for visiting see you again!!")
+        break
+    else:
+        print(" your choice is Invalid ")
