@@ -1,0 +1,82 @@
+class Person:
+    def __init__(self, name):
+        self.name = name
+    def display(self):
+        pass
+class Student(Person):
+    def __init__(self, name, marks):
+        super().__init__(name)
+        self.marks = marks
+    def grade(self):
+        if self.marks >= 90:
+            return "A"
+        elif self.marks >= 75:
+            return "B"
+        elif self.marks >= 50:
+            return "C"
+        else:
+            return "Fail"
+    def display(self):
+        print("\nStudent Name :", self.name)
+        print("Marks :", self.marks)
+        print("Grade :", self.grade())
+
+    def __str__(self):
+        return f"Student,{self.name},{self.marks},{self.grade()}"
+class Teacher(Person):
+    def __init__(self, name, subject):
+        super().__init__(name)
+        self.subject = subject
+    def display(self):
+        print("\nTeacher Name :", self.name)
+        print("Subject :", self.subject)
+    def __str__(self):
+        return f"Teacher,{self.name},{self.subject}"
+class Course:
+    def __init__(self, course):
+        self.course = course
+    def display(self):
+        print("\nCourse :", self.course)
+    def __str__(self):
+        return f"Course,{self.course}"
+def save(obj):
+    with open("records.txt", "a") as file:
+        file.write(str(obj) + "\n")
+def show():
+    try:
+        with open("records.txt", "r") as file:
+            print("\n----- Records -----")
+            print(file.read())
+    except FileNotFoundError:
+        print("No records found.")
+while True:
+    print("\n1. Add Student")
+    print("2. Add Teacher")
+    print("3. Add Course")
+    print("4. Show Records")
+    print("5. Exit")
+    choice = input("Enter your choice from the following: ")
+    if choice == "1":
+        name = input("Enter student Name: ")
+        marks = int(input("Marks: "))
+        s = Student(name, marks)
+        s.display()
+        save(s)
+    elif choice == "2":
+        name = input("Enter teacher Name: ")
+        subject = input("Subject: ")
+        t = Teacher(name, subject)
+        t.display()
+        save(t)
+    elif choice == "3":
+        cname = input("Enter course Name: ")
+        c = Course(cname)
+        c.display()
+        save(c)
+    elif choice == "4":
+        show()
+    elif choice == "5":
+        print("Thank You for visiting see you again")
+        break
+    else:
+        print(" Your Choice is invalid")
