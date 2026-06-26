@@ -1,0 +1,63 @@
+def log_salary(func):
+    def wrapper(self):
+        print("\nCalculating Salary...")
+        salary = func(self)
+        print("Salary Calculated Successfully.")
+        return salary
+    return wrapper
+
+class Employee:
+    def __init__(self, emp_id, emp_name):
+        self.emp_id = emp_id
+        self.name = emp_name
+
+    def calculate_salary(self):
+        pass
+class permanent_employee(Employee):
+    def __init__(self, emp_id, emp_name, monthly_salary):
+        super().__init__(emp_id, emp_name)
+        self.monthly_salary = monthly_salary
+    @log_salary
+    def calculate_salary(self):
+        return self.monthly_salary
+class temporary_employee(Employee):
+
+    def __init__(self, emp_id, emp_name, hours, rate):
+        super().__init__(emp_id, emp_name)
+        self.hours = hours
+        self.rate = rate
+
+    @log_salary
+    def calculate_salary(self):
+        return self.hours * self.rate
+def save(emp, salary):
+    with open("payroll.txt", "a") as file:
+        file.write(f"{emp.emp_id}, {emp.name}, Salary = {salary}\n")
+while True:
+
+    print("\n1. Full Time Employee")
+    print("2. Part Time Employee")
+    print("3. Exit")
+    choice = input("Enter your Choice: ")
+    if choice == "1":
+        emp_id = input("Employee ID: ")
+        emp_name = input("Employee Name: ")
+        salary = float(input("Monthly Salary: "))
+        emp = permanent_employee(emp_id, emp_name, salary)
+        total = emp.calculate_salary()
+        print("Salary =", total)
+        save(emp, total)
+    elif choice == "2":
+        emp_id = input("Employee ID: ")
+        emp_name = input("Employee Name: ")
+        hours = int(input("Working Hours: "))
+        rate = float(input("Rate Per Hour: "))
+        emp = temporary_employee(emp_id, emp_name, hours, rate)
+        total = emp.calculate_salary()
+        print("Salary =", total)
+        save(emp, total)
+    elif choice == "3":
+        print("Thank You for visiting see you again")
+        break
+    else:
+        print("Your Choice is invalid")
